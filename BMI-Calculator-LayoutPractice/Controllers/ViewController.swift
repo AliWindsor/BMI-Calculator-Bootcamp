@@ -40,7 +40,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func calculatePressed(_ sender: UIButton) {
-        print(weight.value/sqrt(height.value))
+        print(weight.value/pow(height.value, 2))
     }
     
 
