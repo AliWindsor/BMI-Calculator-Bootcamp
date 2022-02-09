@@ -8,13 +8,15 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class CalculateViewController: UIViewController {
     @IBOutlet weak var heightLabel: UILabel!
     @IBOutlet weak var weightLabel: UILabel!
     
     //slider values stored here
     @IBOutlet weak var height: UISlider!
     @IBOutlet weak var weight: UISlider!
+    
+    var calculatorBrain = CalculatorBrain()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,10 +42,21 @@ class ViewController: UIViewController {
     }
     
     @IBAction func calculatePressed(_ sender: UIButton) {
-        print(weight.value/pow(height.value, 2))
+        //BODMAS, order of operations is used in programming
+        
+       calculatorBrain.calculateBmi(weight: weight.value, height: height.value)
+        
+        self.performSegue(withIdentifier: "goToResult", sender: self)
+        
     }
     
-
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToResult" {
+            let destinationVC = segue.destination as! ResultViewController //specify data type that destination will be. this is called DOWNCASTING.
+            destinationVC.bmiValue = calculatorBrain.bmi ?? "0.0"
+            
+        }
+    }
    
 
 
