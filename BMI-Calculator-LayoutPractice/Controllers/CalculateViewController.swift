@@ -53,7 +53,9 @@ class CalculateViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToResult" {
             let destinationVC = segue.destination as! ResultViewController //specify data type that destination will be. this is called DOWNCASTING.
-            destinationVC.bmiValue = calculatorBrain.bmi ?? "0.0"
+            destinationVC.bmiValue = calculatorBrain.getBMIValue()
+            destinationVC.advice = calculatorBrain.getAdvice()
+            destinationVC.colour = calculatorBrain.getColour()
             
         }
     }
